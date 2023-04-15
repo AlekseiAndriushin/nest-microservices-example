@@ -1,6 +1,8 @@
 import { DatabaseModule, LoggerModule } from '@app/common';
+import { AUTH_SERVICE } from '@app/common/constants/services';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import * as Joi from 'joi';
 import {
   ReservationDocument,
@@ -25,6 +27,7 @@ import { ReservationsService } from './reservations.service';
         PORT: Joi.string().required(),
       }),
     }),
+    ClientsModule.register([{ name: AUTH_SERVICE, transport: Transport.TCP }]),
   ],
   controllers: [ReservationsController],
   providers: [ReservationsService, ReservationsRepository],
