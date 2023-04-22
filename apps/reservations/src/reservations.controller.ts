@@ -11,14 +11,14 @@ import {
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
-import { CurrentUser, UserDto, JwtAuthGuard } from '@app/common';
+import { CurrentUser, JwtAuthGuard, UserDto } from '@app/common';
 
 @Controller('reservations')
 export class ReservationsController {
   constructor(private readonly reservationsService: ReservationsService) {}
 
-  @Post()
   @UseGuards(JwtAuthGuard)
+  @Post()
   async create(
     @Body() createReservationDto: CreateReservationDto,
     @CurrentUser() user: UserDto,

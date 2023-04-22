@@ -1,7 +1,8 @@
+import { CreateChargeDto } from '@app/common';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import Stripe from 'stripe';
-import { CreateChargeDto } from './dto/create-charge.dto';
+
 @Injectable()
 export class PaymentsService {
   private readonly stripe = new Stripe(
@@ -10,6 +11,7 @@ export class PaymentsService {
       apiVersion: '2022-11-15',
     },
   );
+
   constructor(private readonly configService: ConfigService) {}
 
   async createCharge({ card, amount }: CreateChargeDto) {
