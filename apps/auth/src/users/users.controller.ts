@@ -3,7 +3,7 @@ import { CurrentUser } from '@app/common';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
-import { UserDocument } from '../../../../libs/common/src/models/user.schema';
+import { User } from '../../../../libs/common/src/models/user.entity';
 
 @Controller('users')
 export class UsersController {
@@ -16,7 +16,7 @@ export class UsersController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async getUser(@CurrentUser() user: UserDocument) {
+  async getUser(@CurrentUser() user: User) {
     return user;
   }
 }
